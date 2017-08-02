@@ -1,5 +1,6 @@
 <?php
-  $conn = mysql_connect('sql112.byethost8.com', 'b8_20450428', 'Supleget2092');
+  include_once('config/config.php');
+  $conn = mysql_connect($config['host'], $config['dbuser'], $config['dbpass']);
   header('Content-Type: application/json');
   if (!$conn) {
       die('Could not connect: ' . mysql_error());
