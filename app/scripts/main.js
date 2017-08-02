@@ -295,14 +295,12 @@
       console.log(percentage, tour);
 
       $('#state').animate({width: percentage + '%'}, { queue: false, duration: 1500 });
-      if (percentage < 40) {
-        $('#state').css('background-color', 'red');
-      } else if (percentage < 60) {
-        $('#state').css('background-color', 'pink');
-      } else if (percentage < 80) {
-        $('#state').css('background-color', 'blue');
+      if (percentage < 34) {
+        $('#state').css('background-color', 'tomato');
+      } else if (percentage < 67) {
+        $('#state').css('background-color', 'gold');
       } else {
-        $('#state').css('background-color', 'green');
+        $('#state').css('background-color', 'limegreen');
       }
 
       $('#console').text(percentage + '%');
@@ -359,6 +357,7 @@
   $('#hardrefresh').on('click', function() {
     location.reload(true);
   });
+
 })();
 
 // still TODO:

@@ -53,6 +53,7 @@ html, body {
 .mdl-demo .mdl-layout__tab-bar .mdl-layout__tab {
   height: 64px;
   line-height: 64px;
+  color: black;
 }
 .mdl-demo .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
   background-color: white;
@@ -256,4 +257,14 @@ html, body {
   height: 20em;
   z-index: 1000;
   left: -100%;
+}
+
+body > div > div > header > div.mdl-layout__tab-bar-container > div.mdl-layout__tab-bar.mdl-js-ripple-effect.mdl-color--primary-dark.mdl-js-ripple-effect--ignore-events {
+      background-image: url(https://www.freewebheaders.com/wordpress/wp-content/gallery/bicycle/stylish-bicycle-on-yellow-background-header.jpg);
+      background-size: 100% 100%;
+}
+
+#weatherconatiner {
+  margin: auto;
+  /*width: 60%;*/
 }
