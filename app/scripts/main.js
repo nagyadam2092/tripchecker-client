@@ -134,21 +134,44 @@
     y: 3
   };
 
+  // Karika targets
+  var balatonfured = {
+    x: 46.9599039,
+    y: 17.88512019999996
+  };
+  var balatongyorok = {
+    x: 46.75490500000001,
+    y: 17.354876900000022
+  };
+  var balatonboglar = {
+    x: 46.775144,
+    y: 17.664769500000034
+  };
+  var balatonkenese = {
+    x: 47.0385646,
+    y: 18.082918999999947
+  };
+
   var KarikaTour2017 = [
     {
-      from: monor,
-      to: vac,
-      day: 28
+      from: balatonfured,
+      to: balatongyorok,
+      day: 6
     },
     {
-      from: hunor,
-      to: annatanya,
-      day: 29
+      from: balatongyorok,
+      to: balatonboglar,
+      day: 7
     },
     {
-      from: hunor,
-      to: haller,
-      day: 30
+      from: balatonboglar,
+      to: balatonkenese,
+      day: 8
+    },
+    {
+      from: balatonkenese,
+      to: balatonfured,
+      day: 9
     }
   ];
 
