@@ -9,8 +9,9 @@
   echo $_POST['lng'];
   $db_selected = mysql_select_db('b8_20450428_karika', $conn);
 
+  $rowlimit = 30;
 
-  $sql = "SELECT lat, lng FROM karika ORDER BY id DESC LIMIT 10";
+  $sql = "SELECT lat, lng, device FROM karika ORDER BY id DESC LIMIT " . $rowlimit;
 
   $result = mysql_query($sql);
 

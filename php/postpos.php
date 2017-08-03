@@ -7,11 +7,13 @@
   echo 'Connected successfully';
   echo $_POST['lat'];
   echo $_POST['lng'];
+  echo $_POST['device'];
   $db_selected = mysql_select_db('b8_20450428_karika', $conn);
 
   echo $db_selected;
 
-  $sql = "INSERT INTO karika (lat, lng) VALUES (" . $_POST['lat'] . ", " . $_POST['lng'] . ")";
+  $sql = "INSERT INTO karika (lat, lng, device) VALUES (" . $_POST['lat'] . ", " . $_POST['lng'] . ", '" . $_POST['device'] . "')";
+  echo "<br/>" . $sql . "<br />";
 
   if (mysql_query($sql) === TRUE) {
       echo "New record created successfully";

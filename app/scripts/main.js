@@ -263,7 +263,45 @@
   function getRandomColor() {
     var colors =[ 'black', 'brown', 'green', 'purple', 'yellow', 'blue', 'gray', 'orange', 'red', 'white' ];
     return colors[Math.floor(Math.random() * colors.length)];
-  };
+  }
+
+  function getMobileOperatingSystemLetter() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+      return "W";
+    }
+
+    if (/android/i.test(userAgent)) {
+      return "A";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return "I";
+    }
+
+    return "U";
+  }
+
+  function getOthersPos() {
+    $.get(phpGetLocation).done(function(data) {
+      var last = data[0];
+      var mapsUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
+        + last.lat + "," + last.lng + "&zoom=11&size=300x300&sensor=false&";
+      var gMapsUrl = 'https://www.google.com/maps/dir//';
+      for (var i=0; i<15; i++) {
+        var pos = data[i];
+        mapsUrl += "markers=color:" + getRandomColor() + '|label:' + pos.device.charAt(0).toUpperCase()
+          + "|" + pos.lat + "," + pos.lng
+          + "&";
+        gMapsUrl += pos.lat + ',' + pos.lng + '/';
+      }
+      $('#guestgooglemaplink').attr('href', gMapsUrl)
+      $('#guestmap').attr('src', mapsUrl);
+    });
+  }
 
   function geoFindMe() {
     var output = document.getElementById("out");
@@ -307,8 +345,11 @@
 
       $.post(phpPostLocation, {
         lat: latitude,
-        lng: longitude
+        lng: longitude,
+        device: getMobileOperatingSystemLetter()
       });
+
+      getOthersPos();
     }
 
     function error() {
@@ -336,20 +377,6 @@
   $('.mdl-layout__content').css('padding-bottom', ($('footer').height() + 10) + 'px');
 
   geoFindMe();
-
-  $.get(phpGetLocation).done(function(data) {
-    var last = data[0];
-    var mapsUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
-      + last.lat + "," + last.lng + "&zoom=11&size=300x300&sensor=false&";
-    var gMapsUrl = 'https://www.google.com/maps/dir//';
-    for (var i=0; i<data.length; i++) {
-      var pos = data[i];
-      mapsUrl += "markers=color:" + getRandomColor() + "|" + pos.lat + "," + pos.lng + "&";
-      gMapsUrl += pos.lat + ',' + pos.lng + '/';
-    }
-    $('#guestgooglemaplink').attr('href', gMapsUrl)
-    $('#guestmap').attr('src', mapsUrl);
-  });
 
   window.addEventListener("focus", geoFindMe, false);
 
