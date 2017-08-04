@@ -3,3 +3,4 @@ dist/
 .tmp
 app.yaml
 php/config/
+php/config/config.php
