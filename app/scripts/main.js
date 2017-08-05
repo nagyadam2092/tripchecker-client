@@ -226,8 +226,11 @@
       'No alarm clock needed, my PASSION wakes me.'
     ];
 
-    console.log(quotes.length);
     return quotes[Math.floor(Math.random() * quotes.length)];
+  }
+
+  function isInTourPos(pos) {
+    return pos.x < szekesfehervar.x && pos.y < szekesfehervar.y;
   }
 
   function getRandomInt8020() {
@@ -339,6 +342,10 @@
       var longitude = position.coords.longitude;
       pos.lat = latitude;
       pos.lon = longitude;
+      var _pos = {
+        x: latitude,
+        y: longitude
+      };
       var tour = getTourByDay();
 
       var percentage = Math.round(
@@ -353,8 +360,6 @@
         animateUnic();
       }
 
-      console.log(percentage, tour);
-
       $('#state').animate({width: percentage + '%'}, { queue: false, duration: 1500 });
       if (percentage < 34) {
         $('#state').css('background-color', 'tomato');
@@ -366,11 +371,13 @@
 
       $('#console').text(percentage + '%');
 
-      $.post(phpPostLocation, {
-        lat: latitude,
-        lng: longitude,
-        device: getMobileOperatingSystemLetter()
-      });
+      if (isInTourPos(_pos)) {
+        $.post(phpPostLocation, {
+          lat: latitude,
+          lng: longitude,
+          device: getMobileOperatingSystemLetter()
+        });
+      }
 
       getOthersPos();
     }
